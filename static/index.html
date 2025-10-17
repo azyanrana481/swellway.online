@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swellway Store - Your Ultimate Shopping Destination</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#004E89',
+                        accent: '#FFD23F',
+                        neutral: '#F5F5F5',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-neutral font-inter">
+    <!-- Header -->
+    <header class="bg-white shadow-lg fixed top-0 w-full z-50">
+        <div class="flex items-center justify-between px-4 py-3">
+            <button onclick="toggleDrawer()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <div class="flex items-center">
+                <h1 class="text-xl font-bold text-primary">Swellway</h1>
+                <span class="text-xl font-light text-secondary ml-1">Store</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="showSearch()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+                <button onclick="showCart()" class="p-2 relative hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                    </svg>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Drawer -->
+    <div id="drawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50" onclick="toggleDrawer()"></div>
+        <div class="absolute left-0 top-0 h-full w-80 bg-white shadow-xl transform -translate-x-full transition-transform duration-300" id="drawerContent">
+            <div class="p-6">
+                <!-- Profile Section -->
+                <div class="flex items-center mb-6 pb-6 border-b border-gray-200">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-xl font-bold">
+                        U
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-900">Welcome!</h3>
+                        <p class="text-sm text-gray-600">Guest User</p>
+                        <button onclick="showLogin()" class="text-primary text-sm font-medium hover:underline">Sign In</button>
+                    </div>
+                    <button onclick="toggleDrawer()" class="ml-auto p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="space-y-2">
+                    <a href="#" onclick="showHome(); toggleDrawer();" class="flex items-center py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="#" onclick="showCategories(); toggleDrawer();" class="flex items-center py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                        </svg>
+                        Categories
+                    </a>
+                    <a href="#" onclick="showOrders(); toggleDrawer();" class="flex items-center py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        My Orders
+                    </a>
+                    <a href="#" onclick="showProfile(); toggleDrawer();" class="flex items-center py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        Profile
+                    </a>
+                </nav>
+                
+                <!-- Social Links -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-sm text-gray-600 mb-3">Follow us on:</p>
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/itx_xaibi_" target="_blank" class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/xaibi.rana.2025" target="_blank" class="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-lg hover:shadow-lg transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-16 pb-20">
+        <!-- Banner Slider -->
+        <section class="relative h-64 md:h-80 overflow-hidden">
+            <div id="bannerSlider" class="flex transition-transform duration-500 ease-in-out h-full">
+                <div class="min-w-full bg-gradient-to-r from-primary to-red-500 flex items-center justify-center text-white relative">
+                    <div class="text-center z-10">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">Welcome to Swellway Store</h2>
+                        <p class="text-lg md:text-xl mb-6">Your Ultimate Shopping Destination</p>
+                        <button onclick="showCategories()" class="bg-white text-primary px-8 py-3 rounded-full font-semibold text-lg hover:shadow-lg transition-all transform hover:scale-105">
+                            Shop Now
+                        </button>
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                </div>
+                <div class="min-w-full bg-gradient-to-r from-secondary to-blue-600 flex items-center justify-center text-white relative">
+                    <div class="text-center z-10">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">Electronics Sale</h2>
+                        <p class="text-lg md:text-xl mb-6">Up to 50% Off on Latest Gadgets</p>
+                        <button onclick="showCategory('electronics')" class="bg-white text-secondary px-8 py-3 rounded-full font-semibold text-lg hover:shadow-lg transition-all transform hover:scale-105">
+                            Shop Electronics
+                        </button>
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                </div>
+                <div class="min-w-full bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center text-white relative">
+                    <div class="text-center z-10">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4">Fresh Groceries</h2>
+                        <p class="text-lg md:text-xl mb-6">Farm Fresh Delivered to Your Door</p>
+                        <button onclick="showCategory('groceries')" class="bg-white text-green-600 px-8 py-3 rounded-full font-semibold text-lg hover:shadow-lg transition-all transform hover:scale-105">
+                            Shop Groceries
+                        </button>
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                </div>
+            </div>
+            
+            <!-- Slider Controls -->
+            <button onclick="previousSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            
+            <!-- Slider Indicators -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <button onclick="goToSlide(0)" class="w-3 h-3 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all" id="indicator-0"></button>
+                <button onclick="goToSlide(1)" class="w-3 h-3 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all" id="indicator-1"></button>
+                <button onclick="goToSlide(2)" class="w-3 h-3 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75 transition-all" id="indicator-2"></button>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="px-4 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="text-2xl font-bold text-primary">1000+</div>
+                    <div class="text-sm text-gray-600">Products</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="text-2xl font-bold text-secondary">50K+</div>
+                    <div class="text-sm text-gray-600">Happy Customers</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="text-2xl font-bold text-green-500">24/7</div>
+                    <div class="text-sm text-gray-600">Support</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 text-center shadow-md hover:shadow-lg transition-shadow">
+                    <div class="text-2xl font-bold text-purple-500">Free</div>
+                    <div class="text-sm text-gray-600">Delivery</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section id="categories" class="px-4 py-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Shop by Category</h3>
+                <button onclick="showAllCategories()" class="text-primary font-medium hover:underline">View All</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-all transform hover:scale-105" onclick="showCategory('electronics')">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300&h=200&fit=crop" alt="Electronics" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold text-gray-900">Electronics</h4>
+                        <p class="text-sm text-gray-600">Latest gadgets & tech</p>
+                        <div class="mt-2 text-primary font-medium text-sm">500+ items</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-all transform hover:scale-105" onclick="showCategory('fashion')">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&h=200&fit=crop" alt="Fashion" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold text-gray-900">Fashion</h4>
+                        <p class="text-sm text-gray-600">Trendy clothing & style</p>
+                        <div class="mt-2 text-primary font-medium text-sm">300+ items</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-all transform hover:scale-105" onclick="showCategory('groceries')">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=200&fit=crop" alt="Groceries" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold text-gray-900">Groceries</h4>
+                        <p class="text-sm text-gray-600">Fresh food & essentials</p>
+                        <div class="mt-2 text-primary font-medium text-sm">150+ items</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-all transform hover:scale-105" onclick="showCategory('accessories')">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=200&fit=crop" alt="Accessories" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold text-gray-900">Accessories</h4>
+                        <p class="text-sm text-gray-600">Watches, jewelry & more</p>
+                        <div class="mt-2 text-primary font-medium text-sm">200+ items</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="px-4 py-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Featured Products</h3>
+                <button onclick="showAllProducts()" class="text-primary font-medium hover:underline">View All</button>
+            </div>
+            <div id="products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Products will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Special Offers -->
+        <section class="px-4 py-6">
+            <div class="bg-gradient-to-r from-accent to-yellow-400 rounded-xl p-6 text-center">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Special Offers</h3>
+                <p class="text-gray-700 mb-4">Get up to 70% off on selected items</p>
+                <button onclick="showOffers()" class="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                    View Offers
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 w-full bg-white border-t border-gray-200 shadow-lg">
+        <div class="flex justify-around py-2">
+            <button onclick="showHome()" class="flex flex-col items-center p-2 text-primary" id="nav-home">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="text-xs font-medium">Home</span>
+            </button>
+            <button onclick="showCategories()" class="flex flex-col items-center p-2 text-gray-600 hover:text-primary transition-colors" id="nav-categories">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                </svg>
+                <span class="text-xs font-medium">Categories</span>
+            </button>
+            <button onclick="showSearch()" class="flex flex-col items-center p-2 text-gray-600 hover:text-primary transition-colors" id="nav-search">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <span class="text-xs font-medium">Search</span>
+            </button>
+            <button onclick="showCart()" class="flex flex-col items-center p-2 text-gray-600 hover:text-primary transition-colors relative" id="nav-cart">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                <span class="text-xs font-medium">Cart</span>
+                <span id="navCartCount" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium hidden">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

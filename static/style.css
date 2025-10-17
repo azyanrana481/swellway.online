@@ -1,0 +1,337 @@
+/* Custom styles for Swellway Store */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF6B35;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e55a2b;
+}
+
+/* Drawer animations */
+.drawer-open {
+    transform: translateX(0) !important;
+}
+
+/* Product card hover effects */
+.product-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.product-card:hover::before {
+    left: 100%;
+}
+
+/* Button styles */
+.btn-primary {
+    background: linear-gradient(135deg, #FF6B35, #e55a2b);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e55a2b, #d14d20);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #004E89, #003d6b);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 78, 137, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #003d6b, #002c4f);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 78, 137, 0.4);
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Loading animation */
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+    z-index: 1001;
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Star rating */
+.star-rating {
+    color: #FFD23F;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Price styling */
+.price-original {
+    position: relative;
+}
+
+.price-original::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ef4444;
+    transform: translateY(-50%);
+}
+
+/* Category card hover effect */
+.category-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.category-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(0, 78, 137, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.category-card:hover::after {
+    opacity: 1;
+}
+
+/* Banner slider indicators */
+.slider-indicator {
+    transition: all 0.3s ease;
+}
+
+.slider-indicator.active {
+    background-color: white !important;
+    transform: scale(1.2);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+        padding: 1.5rem;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .notification {
+        right: 0.5rem;
+        left: 0.5rem;
+        top: 4rem;
+    }
+}
+
+/* Custom input styles */
+.custom-input {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* Quantity selector */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    background: #f9fafb;
+    border: none;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.quantity-btn:hover {
+    background: #FF6B35;
+    color: white;
+}
+
+.quantity-display {
+    padding: 0.75rem 1.5rem;
+    background: white;
+    border-left: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* Cart badge animation */
+.cart-badge {
+    animation: bounceIn 0.5s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, #FF6B35, #004E89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
